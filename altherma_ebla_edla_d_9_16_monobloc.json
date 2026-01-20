@@ -1,0 +1,1786 @@
+[
+  {
+    "registry_id": 0,
+    "offset": 0,
+    "conv_id": 802,
+    "data_size": 0,
+    "data_type": -1,
+    "label": "*Refrigerant type"
+  },
+  {
+    "registry_id": 0,
+    "offset": 0,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Sensor Data Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "INV compressor Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 2,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "STD compressor Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 3,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Fan Data Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 4,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Expansion Valve Data Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 5,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "4 Way Valve Data Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 6,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Crank Case Heater Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 7,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Solenoid valve Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 8,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Max. connectable indoor units"
+  },
+  {
+    "registry_id": 0,
+    "offset": 9,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Connected Indoor Unit Qty"
+  },
+  {
+    "registry_id": 0,
+    "offset": 10,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U MPU ID (xx)"
+  },
+  {
+    "registry_id": 0,
+    "offset": 11,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U MPU ID (yy)"
+  },
+  {
+    "registry_id": 0,
+    "offset": 12,
+    "conv_id": 105,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U capacity (kW)"
+  },
+  {
+    "registry_id": 16,
+    "offset": 0,
+    "conv_id": 217,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Operation Mode"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Thermostat ON/OFF"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Restart standby"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Startup Control"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Defrost Operation"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Oil Return Operation"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Pressure equalizing operation"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Demand Signal"
+  },
+  {
+    "registry_id": 16,
+    "offset": 1,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Low noise control"
+  },
+  {
+    "registry_id": 16,
+    "offset": 4,
+    "conv_id": 203,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Error type"
+  },
+  {
+    "registry_id": 16,
+    "offset": 5,
+    "conv_id": 204,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Error Code"
+  },
+  {
+    "registry_id": 16,
+    "offset": 6,
+    "conv_id": 114,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Target Evap. Temp."
+  },
+  {
+    "registry_id": 16,
+    "offset": 8,
+    "conv_id": 114,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Target Cond. Temp."
+  },
+  {
+    "registry_id": 16,
+    "offset": 10,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Discharge Temp. Drop"
+  },
+  {
+    "registry_id": 16,
+    "offset": 10,
+    "conv_id": 310,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Discharge Temp. Protection Retry Qty"
+  },
+  {
+    "registry_id": 16,
+    "offset": 10,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Comp. INV Current Drop"
+  },
+  {
+    "registry_id": 16,
+    "offset": 10,
+    "conv_id": 311,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Comp. INV Current Protection Retry Qty"
+  },
+  {
+    "registry_id": 16,
+    "offset": 11,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "HP Drop Control"
+  },
+  {
+    "registry_id": 16,
+    "offset": 11,
+    "conv_id": 310,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "HP Protection Retry Qty"
+  },
+  {
+    "registry_id": 16,
+    "offset": 11,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "LP Drop Control"
+  },
+  {
+    "registry_id": 16,
+    "offset": 11,
+    "conv_id": 311,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "LP Protection Retry Qty"
+  },
+  {
+    "registry_id": 16,
+    "offset": 12,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Fin Temp. Drop Control"
+  },
+  {
+    "registry_id": 16,
+    "offset": 12,
+    "conv_id": 310,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Fin Temp. Protection Retry Qty"
+  },
+  {
+    "registry_id": 16,
+    "offset": 12,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Other Drop Control"
+  },
+  {
+    "registry_id": 16,
+    "offset": 12,
+    "conv_id": 311,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 17,
+    "offset": 0,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U EEPROM (1st digit)"
+  },
+  {
+    "registry_id": 17,
+    "offset": 1,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U EEPROM (3rd 4th digit)"
+  },
+  {
+    "registry_id": 17,
+    "offset": 2,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U EEPROM (5th 6th digit)"
+  },
+  {
+    "registry_id": 17,
+    "offset": 3,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U EEPROM (7th 8th digit)"
+  },
+  {
+    "registry_id": 17,
+    "offset": 4,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U EEPROM (10th digit)"
+  },
+  {
+    "registry_id": 17,
+    "offset": 5,
+    "conv_id": 214,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U EEPROM (11th digit)"
+  },
+  {
+    "registry_id": 0,
+    "offset": 0,
+    "conv_id": 995,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "NextDataGrid"
+  },
+  {
+    "registry_id": 32,
+    "offset": 0,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "R1T-Outdoor air temp."
+  },
+  {
+    "registry_id": 32,
+    "offset": 2,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "O/U Heat Exch. Temp.(R4T)"
+  },
+  {
+    "registry_id": 32,
+    "offset": 4,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Discharge pipe temp.(R2T)"
+  },
+  {
+    "registry_id": 32,
+    "offset": 6,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Suction pipe temp.(R3T)"
+  },
+  {
+    "registry_id": 32,
+    "offset": 8,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Heat exchanger mid-temp.(R5T)"
+  },
+  {
+    "registry_id": 32,
+    "offset": 10,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Liquid pipe temp.(R6T)"
+  },
+  {
+    "registry_id": 32,
+    "offset": 12,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 2,
+    "label": "High Pressure"
+  },
+  {
+    "registry_id": 32,
+    "offset": 12,
+    "conv_id": 405,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "High Pressure(T)"
+  },
+  {
+    "registry_id": 32,
+    "offset": 14,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 2,
+    "label": "Low Pressure"
+  },
+  {
+    "registry_id": 32,
+    "offset": 14,
+    "conv_id": 405,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Low Pressure(T)"
+  },
+  {
+    "registry_id": 33,
+    "offset": 0,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "INV primary current (A)"
+  },
+  {
+    "registry_id": 33,
+    "offset": 2,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "INV secondary current (A)"
+  },
+  {
+    "registry_id": 33,
+    "offset": 4,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "INV fin temp."
+  },
+  {
+    "registry_id": 33,
+    "offset": 6,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Fan1 Fin temp."
+  },
+  {
+    "registry_id": 33,
+    "offset": 8,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Fan2 Fin temp."
+  },
+  {
+    "registry_id": 33,
+    "offset": 10,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Compressor outlet temperature"
+  },
+  {
+    "registry_id": 0,
+    "offset": 0,
+    "conv_id": 995,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "NextDataGrid"
+  },
+  {
+    "registry_id": 48,
+    "offset": 0,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "INV frequency (rps)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 1,
+    "conv_id": 211,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Fan 1 (step)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 2,
+    "conv_id": 211,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Fan 2 (step)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 3,
+    "conv_id": 151,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Expansion valve 1 (pls)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 5,
+    "conv_id": 151,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Expansion valve 2 (pls)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 7,
+    "conv_id": 151,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Expansion valve 3 (pls)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 9,
+    "conv_id": 151,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Expansion valve 4 (pls)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 11,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "4 Way Valve"
+  },
+  {
+    "registry_id": 48,
+    "offset": 12,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Crank case heater"
+  },
+  {
+    "registry_id": 48,
+    "offset": 13,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Hot gas bypass valve (Y3S)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 13,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "LP bypass valve (Y2S)"
+  },
+  {
+    "registry_id": 48,
+    "offset": 13,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Y3S"
+  },
+  {
+    "registry_id": 0,
+    "offset": 0,
+    "conv_id": 998,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "In-Out separator"
+  },
+  {
+    "registry_id": 160,
+    "offset": 0,
+    "conv_id": 119,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Suction temp"
+  },
+  {
+    "registry_id": 160,
+    "offset": 2,
+    "conv_id": 119,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Outdoor heat exchanger temp."
+  },
+  {
+    "registry_id": 160,
+    "offset": 4,
+    "conv_id": 119,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Liquid pipe temp."
+  },
+  {
+    "registry_id": 160,
+    "offset": 6,
+    "conv_id": 119,
+    "data_size": 2,
+    "data_type": 2,
+    "label": "Pressure"
+  },
+  {
+    "registry_id": 160,
+    "offset": 8,
+    "conv_id": 151,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Expansion valve 3 (pls)"
+  },
+  {
+    "registry_id": 160,
+    "offset": 10,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U MPU ID"
+  },
+  {
+    "registry_id": 160,
+    "offset": 11,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "O/U MPU ID"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "HPS operation"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Safeguard operation"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Crank case heater"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Solenoid Valve 3"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Solenoid Valve 2"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Solenoid Valve 1"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "4 way valve (Y1S)"
+  },
+  {
+    "registry_id": 160,
+    "offset": 12,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "52C Output"
+  },
+  {
+    "registry_id": 160,
+    "offset": 13,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Discharge Temp. Drop"
+  },
+  {
+    "registry_id": 160,
+    "offset": 13,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "During emergency operation"
+  },
+  {
+    "registry_id": 160,
+    "offset": 13,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor unit blowout 50 C flag"
+  },
+  {
+    "registry_id": 160,
+    "offset": 13,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Powerful bit (MT setting bit)"
+  },
+  {
+    "registry_id": 160,
+    "offset": 14,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Compressor port temperature"
+  },
+  {
+    "registry_id": 161,
+    "offset": 0,
+    "conv_id": 119,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "(Raw data)Water heat exchanger inlet temp."
+  },
+  {
+    "registry_id": 161,
+    "offset": 2,
+    "conv_id": 119,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "(Raw data)Water heat exchanger outlet temp."
+  },
+  {
+    "registry_id": 161,
+    "offset": 4,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Liquid INJ solenoid valve (Y4S)"
+  },
+  {
+    "registry_id": 161,
+    "offset": 4,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Bottom Plate Heater"
+  },
+  {
+    "registry_id": 161,
+    "offset": 4,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "PHE Heater"
+  },
+  {
+    "registry_id": 161,
+    "offset": 5,
+    "conv_id": 114,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Target Discharge Temp."
+  },
+  {
+    "registry_id": 161,
+    "offset": 7,
+    "conv_id": 114,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Target port temperature"
+  },
+  {
+    "registry_id": 161,
+    "offset": 9,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Monobloc setting"
+  },
+  {
+    "registry_id": 161,
+    "offset": 9,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Minichiller setting"
+  },
+  {
+    "registry_id": 161,
+    "offset": 9,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "MT setting"
+  },
+  {
+    "registry_id": 161,
+    "offset": 9,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "GSHP setting"
+  },
+  {
+    "registry_id": 161,
+    "offset": 9,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Hydro split setting"
+  },
+  {
+    "registry_id": 161,
+    "offset": 9,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Alterma LT setting"
+  },
+  {
+    "registry_id": 96,
+    "offset": 0,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Data Enable/Disable"
+  },
+  {
+    "registry_id": 96,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor Unit Address"
+  },
+  {
+    "registry_id": 96,
+    "offset": 2,
+    "conv_id": 315,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U operation mode"
+  },
+  {
+    "registry_id": 96,
+    "offset": 2,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Ext. Thermostat ON/OFF"
+  },
+  {
+    "registry_id": 96,
+    "offset": 2,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Freeze Protection"
+  },
+  {
+    "registry_id": 96,
+    "offset": 2,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Silent Mode"
+  },
+  {
+    "registry_id": 96,
+    "offset": 2,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Freeze Protection for water piping"
+  },
+  {
+    "registry_id": 96,
+    "offset": 3,
+    "conv_id": 204,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Error Code"
+  },
+  {
+    "registry_id": 96,
+    "offset": 4,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Error detailed code"
+  },
+  {
+    "registry_id": 96,
+    "offset": 5,
+    "conv_id": 203,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Error type"
+  },
+  {
+    "registry_id": 96,
+    "offset": 6,
+    "conv_id": 219,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U capacity code"
+  },
+  {
+    "registry_id": 96,
+    "offset": 7,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "DHW setpoint"
+  },
+  {
+    "registry_id": 96,
+    "offset": 9,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "LW setpoint (main)"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Water flow switch"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Thermal protector (Q1L) BUH"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Thermal protector BSH"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Benefit kWh rate power supply"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Solar input"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "SmartGridContact2"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "SmartGridContact1"
+  },
+  {
+    "registry_id": 96,
+    "offset": 11,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Bivalent Operation"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "2way valve(On:Heat_Off:Cool)"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "3way valve(On:DHW_Off:Space)"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "BSH"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "BUH Step1"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "BUH Step2"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Floor loop shut off valve"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Water pump operation"
+  },
+  {
+    "registry_id": 96,
+    "offset": 12,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Solar pump operation"
+  },
+  {
+    "registry_id": 96,
+    "offset": 13,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor Option Code"
+  },
+  {
+    "registry_id": 96,
+    "offset": 15,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U Software ID (xx)"
+  },
+  {
+    "registry_id": 96,
+    "offset": 14,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U Software ID (yy)"
+  },
+  {
+    "registry_id": 96,
+    "offset": 16,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM Ver."
+  },
+  {
+    "registry_id": 97,
+    "offset": 0,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Data Enable/Disable"
+  },
+  {
+    "registry_id": 97,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor Unit Address"
+  },
+  {
+    "registry_id": 97,
+    "offset": 2,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Leaving water temp. before BUH (R1T)"
+  },
+  {
+    "registry_id": 97,
+    "offset": 4,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Leaving water temp. after BUH (R2T)"
+  },
+  {
+    "registry_id": 97,
+    "offset": 6,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Refrig. Temp. liquid side (R3T)"
+  },
+  {
+    "registry_id": 97,
+    "offset": 8,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Inlet water temp.(R4T)"
+  },
+  {
+    "registry_id": 97,
+    "offset": 10,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "DHW tank temp. (R5T)"
+  },
+  {
+    "registry_id": 97,
+    "offset": 12,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Indoor ambient temp. (R1T)"
+  },
+  {
+    "registry_id": 97,
+    "offset": 14,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Ext. indoor ambient sensor (R6T)"
+  },
+  {
+    "registry_id": 98,
+    "offset": 0,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Data Enable/Disable"
+  },
+  {
+    "registry_id": 98,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor Unit Address"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Reheat ON/OFF"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Storage ECO ON/OFF"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Storage comfort ON/OFF"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Powerful DHW Operation. ON/OFF"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Space heating Operation ON/OFF"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "System OFF (ON:System off)"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 98,
+    "offset": 2,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Emergency (indoor) active/not active"
+  },
+  {
+    "registry_id": 98,
+    "offset": 3,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "LW setpoint (add)"
+  },
+  {
+    "registry_id": 98,
+    "offset": 5,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "RT setpoint"
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Add. Ext. RT Input Cool."
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Add. Ext. RT Input Heat."
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Main RT Cooling"
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Main RT Heating"
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Pwr consumption limit 4"
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Pwr consumption limit 3"
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Pwr consumption limit 2"
+  },
+  {
+    "registry_id": 98,
+    "offset": 7,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Pwr consumption limit 1"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "None"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 306,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 305,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 304,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "PHE Heater"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Tank preheat ON/OFF"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Circulation pump operation"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Alarm output"
+  },
+  {
+    "registry_id": 98,
+    "offset": 8,
+    "conv_id": 300,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Space H Operation output"
+  },
+  {
+    "registry_id": 98,
+    "offset": 9,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Flow sensor (l/min)"
+  },
+  {
+    "registry_id": 98,
+    "offset": 11,
+    "conv_id": 105,
+    "data_size": 1,
+    "data_type": 2,
+    "label": "Water pressure"
+  },
+  {
+    "registry_id": 98,
+    "offset": 12,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Water pump signal (0:max-100:stop)"
+  },
+  {
+    "registry_id": 98,
+    "offset": 13,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "[Future] 3 way Valve Mixing 1"
+  },
+  {
+    "registry_id": 98,
+    "offset": 14,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "[Future] 3 way Valve Mixing 2"
+  },
+  {
+    "registry_id": 98,
+    "offset": 15,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 2,
+    "label": "Refrigerant pressure sensor"
+  },
+  {
+    "registry_id": 99,
+    "offset": 0,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Data Enable/Disable"
+  },
+  {
+    "registry_id": 99,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor Unit Address"
+  },
+  {
+    "registry_id": 99,
+    "offset": 2,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM (3rd digit)"
+  },
+  {
+    "registry_id": 99,
+    "offset": 3,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM (4th 5th digit)"
+  },
+  {
+    "registry_id": 99,
+    "offset": 4,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM (6th 7th digit)"
+  },
+  {
+    "registry_id": 99,
+    "offset": 5,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM (8th 9th digit)"
+  },
+  {
+    "registry_id": 99,
+    "offset": 6,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM (11th digit)"
+  },
+  {
+    "registry_id": 99,
+    "offset": 7,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "I/U EEPROM (12th digit)(rev.)"
+  },
+  {
+    "registry_id": 99,
+    "offset": 8,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 99,
+    "offset": 9,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 99,
+    "offset": 10,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 99,
+    "offset": 11,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 99,
+    "offset": 12,
+    "conv_id": 215,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Not in use"
+  },
+  {
+    "registry_id": 99,
+    "offset": 13,
+    "conv_id": 311,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "BUH output capacity"
+  },
+  {
+    "registry_id": 99,
+    "offset": 14,
+    "conv_id": 161,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Current measured by CT sensor of L1"
+  },
+  {
+    "registry_id": 99,
+    "offset": 15,
+    "conv_id": 161,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Current measured by CT sensor of L2"
+  },
+  {
+    "registry_id": 99,
+    "offset": 16,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "HP Forced FG"
+  },
+  {
+    "registry_id": 99,
+    "offset": 16,
+    "conv_id": 161,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Current measured by CT sensor of L3"
+  },
+  {
+    "registry_id": 100,
+    "offset": 0,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Data Enable/Disable"
+  },
+  {
+    "registry_id": 100,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Indoor Unit Address"
+  },
+  {
+    "registry_id": 100,
+    "offset": 2,
+    "conv_id": 316,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Hybrid Op. Mode"
+  },
+  {
+    "registry_id": 100,
+    "offset": 2,
+    "conv_id": 303,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Boiler Operation Demand"
+  },
+  {
+    "registry_id": 100,
+    "offset": 2,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Boiler DHW Demand"
+  },
+  {
+    "registry_id": 100,
+    "offset": 2,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Bypass Valve Output"
+  },
+  {
+    "registry_id": 100,
+    "offset": 3,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "BE_COP"
+  },
+  {
+    "registry_id": 100,
+    "offset": 5,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Hybrid Heating Target Temp."
+  },
+  {
+    "registry_id": 100,
+    "offset": 7,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Boiler Heating Target Temp."
+  },
+  {
+    "registry_id": 100,
+    "offset": 9,
+    "conv_id": 302,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Add pump"
+  },
+  {
+    "registry_id": 100,
+    "offset": 9,
+    "conv_id": 301,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Main pump"
+  },
+  {
+    "registry_id": 100,
+    "offset": 10,
+    "conv_id": 118,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Mixed water temp."
+  },
+  {
+    "registry_id": 100,
+    "offset": 12,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "2nd Domestic hot water temperature"
+  },
+  {
+    "registry_id": 100,
+    "offset": 14,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": 1,
+    "label": "Target delta T heating"
+  },
+  {
+    "registry_id": 100,
+    "offset": 15,
+    "conv_id": 152,
+    "data_size": 1,
+    "data_type": 1,
+    "label": "Target delta T cooling"
+  },
+  {
+    "registry_id": 101,
+    "offset": 0,
+    "conv_id": 307,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "Data Enable/Disable"
+  },
+  {
+    "registry_id": 101,
+    "offset": 1,
+    "conv_id": 152,
+    "data_size": 2,
+    "data_type": -1,
+    "label": "Indoor Unit Address"
+  },
+  {
+    "registry_id": 101,
+    "offset": 2,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "Outlet water heat exchanger temp (hydro split model) DLWB2"
+  },
+  {
+    "registry_id": 101,
+    "offset": 4,
+    "conv_id": 105,
+    "data_size": 2,
+    "data_type": 1,
+    "label": "[EKMIK] Bizone kit mixed leaving water temperature R1T"
+  },
+  {
+    "registry_id": 101,
+    "offset": 6,
+    "conv_id": 101,
+    "data_size": 1,
+    "data_type": -1,
+    "label": "[EKMIK] Bizone kit mix valve position M1S"
+  }
+]

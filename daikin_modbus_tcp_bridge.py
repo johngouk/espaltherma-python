@@ -32,6 +32,7 @@ Example usage on ESP32 / MicroPython::
 
     from daikin_serial import DaikinSerial
     from daikin_modbus_tcp_bridge import DaikinModbusTCPBridge
+    from daikin_converters import DaikinConverter
 
     # Bring up Wi-Fi and get local IP (not shown here)
     # ...
@@ -43,8 +44,19 @@ Example usage on ESP32 / MicroPython::
     # Configure Daikin protocol once for this heat pump ("I" or "S")
     daikin = DaikinSerial(uart, protocol="I")
 
+    # Load model-specific label definitions
+    converter = DaikinConverter.from_json_file(
+        "altherma_ebla_edla_d_9_16_monobloc.json"
+    )
+
     # Start Modbus TCP bridge on all interfaces, port 502, unit ID 1
-    bridge = DaikinModbusTCPBridge(daikin, unit_id=1, host="0.0.0.0", port=502)
+    bridge = DaikinModbusTCPBridge(
+        daikin,
+        converter=converter,
+        unit_id=1,
+        host="0.0.0.0",
+        port=502,
+    )
     bridge.serve_forever()
 
 """
@@ -57,6 +69,7 @@ except ImportError:  # pragma: no cover - CPython fallback for local testing
     import socket  # type: ignore[assignment]
 
 from daikin_serial import DaikinSerial, DaikinSerialError
+from daikin_converters import DaikinConverter
 
 
 class ModbusServerError(Exception):
@@ -77,6 +90,10 @@ class DaikinModbusTCPBridge:
         Local IP address to bind to (default ``"0.0.0.0"``).
     port:
         TCP port to listen on (default 502).
+    converter:
+        A :class:`DaikinConverter` instance constructed with the appropriate
+        model JSON definition. This bridge *requires* a converter and will
+        raise if one is not supplied.
     logger:
         Optional callable taking a single string for debug logging.
         Defaults to ``print``. Pass ``False`` to disable logging.
@@ -84,17 +101,19 @@ class DaikinModbusTCPBridge:
     Limitations
     -----------
     - Only Modbus function code 3 (Read Holding Registers) is supported.
-    - All requested registers are currently backed by a *single* Daikin
-      registry: the Modbus starting address is used as ``reg_id`` and the
-      requested quantity controls how many bytes of that registry payload
-      are exposed.
+    - Each Modbus holding register address encodes a Daikin
+      ``(registry_id, offset)`` pair as ``(registry_id << 8) | offset``.
+      The bridge reads each referenced Daikin registry once per request and
+      uses :class:`DaikinConverter` to extract and scale the value.
     - No write functions are implemented; unsupported functions return a
       Modbus exception response (ILLEGAL FUNCTION).
     """
 
-    def __init__(self, daikin: DaikinSerial, unit_id: int = 1,
-                 host: str = "0.0.0.0", port: int = 502, logger=None) -> None:
+    def __init__(self, daikin: DaikinSerial, converter: DaikinConverter,
+                 unit_id: int = 1, host: str = "0.0.0.0", port: int = 502,
+                 logger=None) -> None:
         self.daikin = daikin
+        self.converter = converter
         self.unit_id = int(unit_id) & 0xFF
         self.host = host
         self.port = int(port)
@@ -231,12 +250,15 @@ class DaikinModbusTCPBridge:
 
         Mapping strategy
         ----------------
-        - The Modbus starting address is interpreted as a Daikin ``reg_id``.
-        - The requested quantity determines how many 16-bit Modbus registers
-          (2 * quantity bytes) we will expose from the Daikin payload.
-        - We return as many bytes from the Daikin payload as will fit into the
-          requested number of registers and pad with zeros if the payload is
-          shorter than requested.
+        - Each Modbus holding register address is treated as a packed
+          ``(registry_id << 8) | offset`` value.
+        - For all addresses in the requested range we group by ``registry_id``,
+          read each referenced Daikin registry once via
+          :meth:`DaikinSerial.query_registry`, and then call
+          :meth:`DaikinConverter.convert_field` with ``(registry_id, offset, payload)``.
+        - The first 16-bit register returned by the converter for each
+          ``(registry_id, offset)`` is used as the Modbus holding register
+          value; if the field is unknown or out of range, 0 is returned.
         """
 
         if len(pdu) < 5:
@@ -250,34 +272,43 @@ class DaikinModbusTCPBridge:
             # Modbus spec limit for FC3
             return bytes([0x83, 0x03])  # ILLEGAL DATA VALUE
 
-        reg_id = start_addr & 0xFF
-
-        try:
-            payload = self._read_daikin_payload(reg_id)
-        except DaikinSerialError as exc:
-            self._log("Daikin error on reg 0x%02X: %r" % (reg_id, exc))
-            # Map to Modbus ILLEGAL DATA ADDRESS
-            return bytes([0x83, 0x02])
-        except Exception as exc:  # pragma: no cover - defensive
-            self._log("Unexpected error on reg 0x%02X: %r" % (reg_id, exc))
-            return bytes([0x83, 0x04])  # SLAVE DEVICE FAILURE
-
-        # We want to expose at most quantity * 2 bytes.
-        total_bytes = quantity * 2
-
-        if len(payload) < total_bytes:
-            # Pad with zeros if the heat pump returned fewer bytes
-            payload = payload + bytes(total_bytes - len(payload))
-        else:
-            # Truncate to the requested size
-            payload = payload[:total_bytes]
-
-        # Build list of 16-bit register values from the payload bytes
+        # Packed (registry_id << 8) | offset addressing using DaikinConverter
         regs = []  # type: list[int]
+        payload_cache = {}  # type: dict[int, bytes]
         for i in range(quantity):
-            hi = payload[2 * i]
-            lo = payload[2 * i + 1]
-            regs.append(((hi << 8) | lo) & 0xFFFF)
+            addr = (start_addr + i) & 0xFFFF
+            registry_id = (addr >> 8) & 0xFF
+            offset = addr & 0xFF
+
+            if registry_id not in payload_cache:
+                try:
+                    payload_cache[registry_id] = self._read_daikin_payload(registry_id)
+                except DaikinSerialError as exc:
+                    self._log("Daikin error on reg 0x%02X: %r" % (registry_id, exc))
+                    # Map to Modbus ILLEGAL DATA ADDRESS
+                    return bytes([0x83, 0x02])
+                except Exception as exc:  # pragma: no cover - defensive
+                    self._log("Unexpected error on reg 0x%02X: %r" % (registry_id, exc))
+                    return bytes([0x83, 0x04])  # SLAVE DEVICE FAILURE
+
+            payload = payload_cache[registry_id]
+
+            try:
+                field_regs = self.converter.convert_field(  # type: ignore[attr-defined]
+                    registry_id, offset, payload
+                )
+            except Exception as exc:  # pragma: no cover - defensive
+                self._log(
+                    "Converter error for reg 0x%02X offset 0x%02X: %r"
+                    % (registry_id, offset, exc)
+                )
+                regs.append(0)
+                continue
+
+            if not field_regs:
+                regs.append(0)
+            else:
+                regs.append(int(field_regs[0]) & 0xFFFF)
 
         # Build response PDU
         byte_count = len(regs) * 2

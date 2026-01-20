@@ -12,13 +12,26 @@ Given:
 Call::
 
     raw = payload[offset:offset + data_size]
-    text = convert_raw_value(conv_id, raw)
+    regs = convert_raw_value(conv_id, raw)
 
-``text`` will match what the C++ ``Converter::convert()`` writes into
-``def->asString`` for the corresponding ``LabelDef``.
+``regs`` is a list of 16-bit big-endian integers suitable to be used as
+Modbus holding registers.
+
+Numeric values are still scaled using the same logic as
+``include/converters.h`` (e.g. temperature scaling, pressure-to-temperature
+mapping). Converters which originally mapped values to literal strings now
+return the underlying raw value encoded into registers, except for ON/OFF
+cases, which are represented as ``0x0001`` (ON) and ``0x0000`` (OFF).
 """
 
 from __future__ import annotations
+
+import struct
+
+try:  # MicroPython compatibility
+    import ujson as json  # type: ignore[import]
+except ImportError:  # pragma: no cover - CPython fallback
+    import json  # type: ignore[assignment]
 
 
 def convert_press_to_temp(data: float) -> float:
@@ -65,35 +78,32 @@ def get_signed_value(data: bytes, cnvflg: int) -> int:
     return num
 
 
-def _convert_table300(data: bytes, table_id: int) -> str:
-    """Binary flag to ON/OFF (Table 300..307)."""
+def _convert_table300_flag(data: bytes, table_id: int) -> bool:
+    """Return True/False for ON/OFF (Table 300..307)."""
 
     bit_index = table_id % 10
     mask = 1 << bit_index
-    return "ON" if (data[0] & mask) > 0 else "OFF"
+    return (data[0] & mask) > 0
 
 
-def _convert_table203(data: bytes) -> str:
-    v = data[0]
-    if v == 0:
-        return "Normal"
-    if v == 1:
-        return "Error"
-    if v == 2:
-        return "Warning"
-    if v == 3:
-        return "Caution"
-    return "-"
+def _convert_table203(data: bytes) -> int:
+    """Return the raw status code for table 203.
+
+    The original C++ mapped 0..3 to strings (Normal/Error/Warning/Caution).
+    For Modbus purposes we keep the underlying numeric code.
+    """
+
+    return data[0] & 0xFF
 
 
-def _convert_table204(data: bytes) -> str:
-    array1 = " ACEHFJLPU987654"
-    array2 = "0123456789AHCJEF"
-    num = (data[0] >> 4) & 0x0F
-    num2 = data[0] & 0x0F
-    c1 = array1[num] if 0 <= num < len(array1) else " "
-    c2 = array2[num2] if 0 <= num2 < len(array2) else " "
-    return c1 + c2
+def _convert_table204(data: bytes) -> int:
+    """Return the raw packed code used by table 204.
+
+    The C++ version mapped this to a two-character code. Here we simply
+    keep the packed byte value for Modbus transport.
+    """
+
+    return data[0] & 0xFF
 
 
 def _convert_table312(data: bytes) -> float:
@@ -105,74 +115,67 @@ def _convert_table312(data: bytes) -> float:
     return val
 
 
-def _convert_table315(data: bytes) -> str:
-    mode = (data[0] & 0xF0) >> 4
-    if mode == 0:
-        return "Stop"
-    if mode == 1:
-        return "Heating"
-    if mode == 2:
-        return "Cooling"
-    if mode == 3:
-        return "??"
-    if mode == 4:
-        return "DHW"
-    if mode == 5:
-        return "Heating + DHW"
-    if mode == 6:
-        return "Cooling + DHW"
-    return "-"
+def _convert_table315(data: bytes) -> int:
+    """Return the raw mode code (upper nibble) for table 315."""
+
+    return (data[0] & 0xF0) >> 4
 
 
-def _convert_table316(data: bytes) -> str:
-    mode = (data[0] & 0xF0) >> 4
-    if mode == 0:
-        return "H/P only"
-    if mode == 1:
-        return "Hybrid"
-    if mode == 2:
-        return "Boiler only"
-    return "Unknown"
+def _convert_table316(data: bytes) -> int:
+    """Return the raw mode code (upper nibble) for table 316."""
+
+    return (data[0] & 0xF0) >> 4
 
 
-def _convert_table200(data: bytes) -> str:
-    return "OFF" if data[0] == 0 else "ON"
+def _convert_table200_flag(data: bytes) -> bool:
+    """Return True/False for ON/OFF (table 200)."""
+
+    return data[0] != 0
 
 
-def _convert_table217(data: bytes) -> str:
-    r217 = [
-        "Fan Only",
-        "Heating",
-        "Cooling",
-        "Auto",
-        "Ventilation",
-        "Auto Cool",
-        "Auto Heat",
-        "Dry",
-        "Aux.",
-        "Cooling Storage",
-        "Heating Storage",
-        "UseStrdThrm(cl)1",
-        "UseStrdThrm(cl)2",
-        "UseStrdThrm(cl)3",
-        "UseStrdThrm(cl)4",
-        "UseStrdThrm(ht)1",
-        "UseStrdThrm(ht)2",
-        "UseStrdThrm(ht)3",
-        "UseStrdThrm(ht)4",
-    ]
-    idx = data[0]
-    if 0 <= idx < len(r217):
-        return r217[idx]
-    return "-"
+def _convert_table217(data: bytes) -> int:
+    """Return the raw operating mode code for table 217."""
+
+    return data[0] & 0xFF
 
 
-def convert_raw_value(conv_id: int, data: bytes) -> str:
-    """Convert raw registry bytes to a human-readable string.
+def _bytes_to_registers(data: bytes) -> list[int]:
+    """Map raw bytes to 16-bit big-endian register values.
 
-    This is a Python port of Converter::convert for a single LabelDef,
-    where ``data`` is the slice starting at that label's offset and
-    ``len(data) == dataSize``.
+    - Every pair of bytes becomes one register: (hi << 8) | lo.
+    - A trailing single byte becomes one register 0x00XX.
+    """
+
+    regs: list[int] = []
+    length = len(data)
+    i = 0
+    while i + 1 < length:
+        hi = data[i]
+        lo = data[i + 1]
+        regs.append((hi << 8) | lo)
+        i += 2
+    if i < length:
+        regs.append(data[i] & 0xFF)
+    return regs
+
+
+def convert_raw_value(conv_id: int, data: bytes) -> list[int]:
+    """Convert raw registry bytes to *register values*.
+
+    This function keeps the scaling and mapping rules from
+    ``include/converters.h`` but expresses the result as 16-bit
+    big-endian integers suitable for Modbus holding registers.
+
+    Behaviour overview
+    ------------------
+    - Numeric converters (most 100/150/400-series IDs, plus 312) compute the
+      same physical value as the C++ code and then pack it into a 32-bit
+      IEEE-754 float, returned as two 16-bit registers (high word first).
+    - Converters which originally mapped values to strings (e.g. 203, 204,
+      217, 215, 216, 315, 316, 100) now return the underlying raw codes,
+      encoded into 16-bit registers via :func:`_bytes_to_registers`.
+    - ON/OFF style converters (200 and 300..307, plus the OFF case of 211)
+      return a single register: 0x0001 for ON and 0x0000 for OFF.
 
     Parameters
     ----------
@@ -183,22 +186,66 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
 
     Returns
     -------
-    str
-        Textual representation matching the C++ implementation.
+    list[int]
+        One or more 16-bit big-endian register values.
     """
-
-    dbl = None  # numeric result, if any
-
-    def _return_no_data() -> str:
-        return "---"
 
     # Ensure at least two bytes available for index access
     b = list(data) + [0, 0]
     d0, d1 = b[0], b[1]
 
-    # 100-series: signed conversions
-    if conv_id == 100:
-        return bytes(data).decode(errors="ignore")
+    # ------------------------------------------------------------------
+    # Boolean / string-like converters
+    # ------------------------------------------------------------------
+
+    # convId 200: simple ON/OFF
+    if conv_id == 200:
+        return [0x0001] if _convert_table200_flag(data) else [0x0000]
+
+    # convId 300-307: bit flags -> ON/OFF
+    if conv_id in (300, 301, 302, 303, 304, 305, 306, 307):
+        on = _convert_table300_flag(data, conv_id)
+        return [0x0001] if on else [0x0000]
+
+    # convId 211: OFF or numeric byte
+    if conv_id == 211:
+        if d0 == 0:
+            return [0x0000]
+        # non-zero -> treat as underlying numeric code
+        return _bytes_to_registers(bytes([d0]))
+
+    # Pure string mappings: keep underlying raw codes
+    if conv_id in (203, 204, 217, 315, 316, 100):
+        # 203/204/217/315/316/100 were originally mapped to text; we now
+        # just expose their raw codes/bytes.
+        if conv_id == 203:
+            return _bytes_to_registers(bytes([_convert_table203(data)]))
+        if conv_id == 204:
+            return _bytes_to_registers(bytes([_convert_table204(data)]))
+        if conv_id == 217:
+            return _bytes_to_registers(bytes([_convert_table217(data)]))
+        if conv_id == 315:
+            return _bytes_to_registers(bytes([_convert_table315(data)]))
+        if conv_id == 316:
+            return _bytes_to_registers(bytes([_convert_table316(data)]))
+        # conv_id == 100: raw character bytes
+        return _bytes_to_registers(data)
+
+    # convId 215/216: combine upper and lower nibbles into 16 bits
+    # high nibble -> high 8 bits, low nibble -> low 8 bits.
+    if conv_id in (215, 216):
+        high_nibble = (d0 >> 4) & 0x0F
+        low_nibble = d0 & 0x0F
+        value = (high_nibble << 8) | low_nibble
+        return [value]
+
+    # ------------------------------------------------------------------
+    # Numeric converters (use original scaling, then pack as float32)
+    # ------------------------------------------------------------------
+
+    dbl = None  # numeric result, if any
+
+    # 100-series: signed conversions (except 100 which was handled above)
     if conv_id == 101:
         dbl = float(get_signed_value(data, 0))
     elif conv_id == 102:
@@ -213,12 +260,8 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
         dbl = float(get_signed_value(data, 1)) * 0.1
     elif conv_id == 107:
         dbl = float(get_signed_value(data, 0)) * 0.1
-        if dbl == -3276.8:
-            return _return_no_data()
     elif conv_id == 108:
         dbl = float(get_signed_value(data, 1)) * 0.1
-        if dbl == -3276.8:
-            return _return_no_data()
     elif conv_id == 109:
         dbl = float(get_signed_value(data, 0)) / 256.0 * 2.0
     elif conv_id == 110:
@@ -230,8 +273,6 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
     elif conv_id == 113:
         dbl = float(get_signed_value(data, 1)) * 0.25
     elif conv_id == 114:
-        if d0 == 0 and d1 == 128:
-            return _return_no_data()
         num2 = (d1 << 8) | d0
         if d1 & 0x80:
             num2 = (~(num2 - 1)) & 0xFFFF
@@ -248,8 +289,6 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
     elif conv_id == 118:
         dbl = float(get_signed_value(data, 1)) * 0.01
     elif conv_id == 119:
-        if d0 == 0 and d1 == 128:
-            return _return_no_data()
         num3 = (d1 << 8) | (d0 & 0x7F)
         dbl = ((num3 & 0xFF00) >> 8) + (num3 & 0xFF) / 256.0
 
@@ -281,36 +320,9 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
     elif conv_id == 165:
         dbl = float(get_unsigned_value(data, 0) & 0x3FFF)
 
-    # 200/203/204/217/300/312/315/316 tables
-    elif conv_id == 200:
-        return _convert_table200(data)
-    elif conv_id == 203:
-        return _convert_table203(data)
-    elif conv_id == 204:
-        return _convert_table204(data)
-    elif conv_id in (201, 217):
-        return _convert_table217(data)
-    elif conv_id in (300, 301, 302, 303, 304, 305, 306, 307):
-        return _convert_table300(data, conv_id)
+    # 312: special numeric mapping
     elif conv_id == 312:
         dbl = _convert_table312(data)
-    elif conv_id == 315:
-        return _convert_table315(data)
-    elif conv_id == 316:
-        return _convert_table316(data)
-
-    # 211: "OFF" or numeric
-    elif conv_id == 211:
-        if d0 == 0:
-            return "OFF"
-        else:
-            dbl = float(d0)
-
-    # 215/216: split into two nibbles and format as "{0:x}{1:y}"
-    elif conv_id in (215, 216):
-        num_high = d0 >> 4
-        num_low = d0 & 0x0F
-        return "{0:%d}{1:%d}" % (num_high, num_low)
 
     # 401-406: pressure -> temperature
     elif conv_id == 401:
@@ -320,10 +332,10 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
         dbl = float(get_signed_value(data, 1))
         dbl = convert_press_to_temp(dbl)
     elif conv_id == 403:
-        dbl = float(get_signed_value(data, 0)) / 256.0
+        dbl = float(get_signedValue(data, 0)) / 256.0
         dbl = convert_press_to_temp(dbl)
     elif conv_id == 404:
-        dbl = float(get_signed_value(data, 1)) / 256.0
+        dbl = float(get_signedValue(data, 1)) / 256.0
         dbl = convert_press_to_temp(dbl)
     elif conv_id == 405:
         dbl = float(get_signed_value(data, 0)) * 0.1
@@ -333,8 +345,104 @@ def convert_raw_value(conv_id: int, data: bytes) -> str:
         dbl = convert_press_to_temp(dbl)
 
     else:
-        return "Conv %d not avail." % conv_id
+        # Unknown or unsupported convId: fall back to raw bytes
+        return _bytes_to_registers(data)
 
     if dbl is None:
-        return "Conv %d not avail." % conv_id
-    return ("%g" % dbl)
+        # Should not happen, but fall back to raw bytes defensively
+        return _bytes_to_registers(data)
+
+    # Pack the numeric value as an IEEE-754 32-bit float and return
+    # it as two 16-bit big-endian registers.
+    hi, lo = struct.unpack("!HH", struct.pack("!f", float(dbl)))
+    return [hi, lo]
+
+
+class DaikinConverter:
+    """Lookup and convert Daikin values by ``(registry_id, offset)``.
+
+    This class is a thin helper around :func:`convert_raw_value` which
+    understands the JSON label definition format generated from the original
+    C++ ``LabelDef`` tables.
+
+    Typical usage
+    -------------
+    >>> converter = DaikinConverter.from_json_file("altherma_ebla_edla_d_9_16_monobloc.json")
+    >>> payload = daikin.query_registry(reg_id)
+    >>> regs = converter.convert_field(reg_id, offset, payload)
+    """
+
+    def __init__(self, label_defs) -> None:
+        """Construct from an iterable of label definition mappings.
+
+        ``label_defs`` is usually the result of ``json.load(...)`` on the
+        model JSON file. Only entries with a positive ``data_size`` are
+        registered; entries like "NextDataGrid" (``data_size == 0``) are
+        ignored.
+        """
+
+        mapping = {}
+        for entry in label_defs or []:
+            try:
+                reg_id = int(entry["registry_id"]) & 0xFF
+                offset = int(entry["offset"]) & 0xFF
+                conv_id = int(entry["conv_id"])
+                data_size = int(entry.get("data_size", 0))
+            except (KeyError, TypeError, ValueError):
+                continue
+
+            if data_size <= 0:
+                # Skip markers / non-data rows
+                continue
+
+            mapping[(reg_id, offset)] = (conv_id, data_size)
+
+        self._mapping = mapping
+
+    @classmethod
+    def from_json_file(cls, path: str) -> "DaikinConverter":
+        """Load label definitions from a JSON file and build a converter."""
+
+        with open(path, "r") as f:
+            label_defs = json.load(f)
+        return cls(label_defs)
+
+    def has_field(self, registry_id: int, offset: int) -> bool:
+        """Return True if we have metadata for this (registry, offset)."""
+
+        key = (int(registry_id) & 0xFF, int(offset) & 0xFF)
+        return key in self._mapping
+
+    def convert_field(self, registry_id: int, offset: int, payload: bytes) -> list[int]:
+        """Convert the value at ``(registry_id, offset)`` in *payload*.
+
+        If no matching label definition exists, we fall back to exposing a
+        single raw byte at ``offset`` (if available) as a 16-bit register.
+        """
+
+        reg_id = int(registry_id) & 0xFF
+        off = int(offset) & 0xFF
+        key = (reg_id, off)
+
+        meta = self._mapping.get(key)
+
+        if meta is None:
+            # Unknown field: expose a single raw byte (if present)
+            if off >= len(payload):
+                return []
+            raw = payload[off:off + 1]
+            # conv_id 0 is not special; convert_raw_value will fall back
+            # to _bytes_to_registers(data) and return 0x00XX.
+            return convert_raw_value(0, raw)
+
+        conv_id, data_size = meta
+        end = off + data_size
+
+        if end > len(payload):
+            if off >= len(payload):
+                return []
+            raw = payload[off:]
+        else:
+            raw = payload[off:end]
+
+        return convert_raw_value(conv_id, raw)
