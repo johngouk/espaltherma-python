@@ -72,6 +72,27 @@ This repository contains Python tooling to interface with Daikin Altherma heat p
   - **Description**: the `label` from JSON.
 - This is a convenience document for SCADA/Modbus client configuration.
 
+#### Daikin Field Types
+
+At the Daikin payload level there are two broad kinds of fields:
+
+1. **Bit-style flags packed into a single byte**
+   - A single payload byte (at `offset`) contains multiple independent flags.
+   - In the JSON / C++ labels this appears as several rows that share the same
+     `registry_id` **and** `offset`, but with *different* `conv_id` values
+     (e.g. 300–307) that identify which bit to test.
+   - The original C++ uses `convertTable300` to map each bit to `ON` / `OFF`;
+     in Python these become `0x0001` / `0x0000` in one Modbus register.
+
+2. **Byte / multi-byte value fields**
+   - A logical value is stored in one or more consecutive bytes starting at
+     `offset` for `data_size` bytes.
+   - The `conv_id` selects a numeric or enum conversion in `converters.h`
+     (temperature scaling, pressure to temperature, mode decoding, etc.).
+   - `DaikinConverter.convert_field` slices `payload[offset:offset+data_size]`
+     and passes it to `convert_raw_value`, which applies the same logic and
+     returns one or more 16‑bit Modbus registers.
+
 ## Modbus TCP Bridge
 
 ### `daikin_modbus_tcp_bridge.py`
@@ -152,3 +173,6 @@ To support a different Daikin model:
 - Documentation:
   - Model-specific Modbus maps belong in `*_registers.md` files.
   - Core behaviour and rules for this repo should be kept up to date in this `WARP.md`.
+- Tooling:
+  - When creating ad hoc tools e.g. scripts for conversion etc. always save them as reusable resources.
+  - Keep a list of such tools and their purpose in the WARP.md file

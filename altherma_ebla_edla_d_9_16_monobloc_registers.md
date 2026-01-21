@@ -15,6 +15,9 @@ Entries with `data_size = 0` (such as `"*Refrigerant type"`) are omitted.
 | Register Address | Number of Registers | Description |
 | --- | --- | --- |
 | 0x0000 | 2 | Sensor Data Qty |
+| 0x0000 | 1 | NextDataGrid |
+| 0x0000 | 1 | NextDataGrid |
+| 0x0000 | 1 | In-Out separator |
 | 0x0001 | 2 | INV compressor Qty |
 | 0x0002 | 2 | STD compressor Qty |
 | 0x0003 | 2 | Fan Data Qty |
@@ -58,7 +61,6 @@ Entries with `data_size = 0` (such as `"*Refrigerant type"`) are omitted.
 | 0x1103 | 1 | O/U EEPROM (7th 8th digit) |
 | 0x1104 | 1 | O/U EEPROM (10th digit) |
 | 0x1105 | 1 | O/U EEPROM (11th digit) |
-| 0x0000 | 1 | NextDataGrid |
 | 0x2000 | 2 | R1T-Outdoor air temp. |
 | 0x2002 | 2 | O/U Heat Exch. Temp.(R4T) |
 | 0x2004 | 2 | Discharge pipe temp.(R2T) |
@@ -75,7 +77,6 @@ Entries with `data_size = 0` (such as `"*Refrigerant type"`) are omitted.
 | 0x2106 | 2 | Fan1 Fin temp. |
 | 0x2108 | 2 | Fan2 Fin temp. |
 | 0x210A | 2 | Compressor outlet temperature |
-| 0x0000 | 1 | NextDataGrid |
 | 0x3000 | 2 | INV frequency (rps) |
 | 0x3001 | 1 | Fan 1 (step) |
 | 0x3002 | 1 | Fan 2 (step) |
@@ -88,40 +89,6 @@ Entries with `data_size = 0` (such as `"*Refrigerant type"`) are omitted.
 | 0x300D | 1 | Hot gas bypass valve (Y3S) |
 | 0x300D | 1 | LP bypass valve (Y2S) |
 | 0x300D | 1 | Y3S |
-| 0x0000 | 1 | In-Out separator |
-| 0xA000 | 2 | Suction temp |
-| 0xA002 | 2 | Outdoor heat exchanger temp. |
-| 0xA004 | 2 | Liquid pipe temp. |
-| 0xA006 | 2 | Pressure |
-| 0xA008 | 2 | Expansion valve 3 (pls) |
-| 0xA00A | 2 | O/U MPU ID |
-| 0xA00B | 2 | O/U MPU ID |
-| 0xA00C | 1 | HPS operation |
-| 0xA00C | 1 | Safeguard operation |
-| 0xA00C | 1 | Crank case heater |
-| 0xA00C | 1 | Solenoid Valve 3 |
-| 0xA00C | 1 | Solenoid Valve 2 |
-| 0xA00C | 1 | Solenoid Valve 1 |
-| 0xA00C | 1 | 4 way valve (Y1S) |
-| 0xA00C | 1 | 52C Output |
-| 0xA00D | 1 | Discharge Temp. Drop |
-| 0xA00D | 1 | During emergency operation |
-| 0xA00D | 1 | Indoor unit blowout 50 C flag |
-| 0xA00D | 1 | Powerful bit (MT setting bit) |
-| 0xA00E | 2 | Compressor port temperature |
-| 0xA100 | 2 | (Raw data)Water heat exchanger inlet temp. |
-| 0xA102 | 2 | (Raw data)Water heat exchanger outlet temp. |
-| 0xA104 | 1 | Liquid INJ solenoid valve (Y4S) |
-| 0xA104 | 1 | Bottom Plate Heater |
-| 0xA104 | 1 | PHE Heater |
-| 0xA105 | 2 | Target Discharge Temp. |
-| 0xA107 | 2 | Target port temperature |
-| 0xA109 | 1 | Monobloc setting |
-| 0xA109 | 1 | Minichiller setting |
-| 0xA109 | 1 | MT setting |
-| 0xA109 | 1 | GSHP setting |
-| 0xA109 | 1 | Hydro split setting |
-| 0xA109 | 1 | Alterma LT setting |
 | 0x6000 | 1 | Data Enable/Disable |
 | 0x6001 | 2 | Indoor Unit Address |
 | 0x6002 | 1 | I/U operation mode |
@@ -152,8 +119,8 @@ Entries with `data_size = 0` (such as `"*Refrigerant type"`) are omitted.
 | 0x600C | 1 | Water pump operation |
 | 0x600C | 1 | Solar pump operation |
 | 0x600D | 2 | Indoor Option Code |
-| 0x600F | 1 | I/U Software ID (xx) |
 | 0x600E | 1 | I/U Software ID (yy) |
+| 0x600F | 1 | I/U Software ID (xx) |
 | 0x6010 | 2 | I/U EEPROM Ver. |
 | 0x6100 | 1 | Data Enable/Disable |
 | 0x6101 | 2 | Indoor Unit Address |
@@ -236,3 +203,36 @@ Entries with `data_size = 0` (such as `"*Refrigerant type"`) are omitted.
 | 0x6502 | 2 | Outlet water heat exchanger temp (hydro split model) DLWB2 |
 | 0x6504 | 2 | [EKMIK] Bizone kit mixed leaving water temperature R1T |
 | 0x6506 | 1 | [EKMIK] Bizone kit mix valve position M1S |
+| 0xA000 | 2 | Suction temp |
+| 0xA002 | 2 | Outdoor heat exchanger temp. |
+| 0xA004 | 2 | Liquid pipe temp. |
+| 0xA006 | 2 | Pressure |
+| 0xA008 | 2 | Expansion valve 3 (pls) |
+| 0xA00A | 2 | O/U MPU ID |
+| 0xA00B | 2 | O/U MPU ID |
+| 0xA00C | 1 | HPS operation |
+| 0xA00C | 1 | Safeguard operation |
+| 0xA00C | 1 | Crank case heater |
+| 0xA00C | 1 | Solenoid Valve 3 |
+| 0xA00C | 1 | Solenoid Valve 2 |
+| 0xA00C | 1 | Solenoid Valve 1 |
+| 0xA00C | 1 | 4 way valve (Y1S) |
+| 0xA00C | 1 | 52C Output |
+| 0xA00D | 1 | Discharge Temp. Drop |
+| 0xA00D | 1 | During emergency operation |
+| 0xA00D | 1 | Indoor unit blowout 50 C flag |
+| 0xA00D | 1 | Powerful bit (MT setting bit) |
+| 0xA00E | 2 | Compressor port temperature |
+| 0xA100 | 2 | (Raw data)Water heat exchanger inlet temp. |
+| 0xA102 | 2 | (Raw data)Water heat exchanger outlet temp. |
+| 0xA104 | 1 | Liquid INJ solenoid valve (Y4S) |
+| 0xA104 | 1 | Bottom Plate Heater |
+| 0xA104 | 1 | PHE Heater |
+| 0xA105 | 2 | Target Discharge Temp. |
+| 0xA107 | 2 | Target port temperature |
+| 0xA109 | 1 | Monobloc setting |
+| 0xA109 | 1 | Minichiller setting |
+| 0xA109 | 1 | MT setting |
+| 0xA109 | 1 | GSHP setting |
+| 0xA109 | 1 | Hydro split setting |
+| 0xA109 | 1 | Alterma LT setting |
