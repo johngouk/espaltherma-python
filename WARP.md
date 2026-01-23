@@ -2,6 +2,14 @@
 
 This repository contains Python tooling to interface with Daikin Altherma heat pumps, mirroring the original ESPAltherma C/C++ implementation. It is used both on MicroPython (ESP32) and on a host PC for development/testing.
 
+## To Do
+- sort out the difference between 8bit fields and multiple byte fields
+  - 8bit fields should be served as a 16bit register to be interpreted by the caller
+  - multi-byte fields should be interpreted/converted as currently, and served as a list of consecutive 16bit registers, as long as required
+  - Daikin reg_id + offset entries should be represented by a single ModBus register entry, which returns either 
+  		- a single 16bit register with the 8bits mapped into either LSB or MSB, or
+  		- multiple 16bit registers containing a converted value derived from the original multi-byte Daikin register entry
+
 ## Core Components
 
 ### `daikin_serial.py`
