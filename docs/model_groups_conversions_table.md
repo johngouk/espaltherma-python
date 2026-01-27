@@ -1,0 +1,19 @@
+# Model Groups by Converter Set (Table)
+
+Each row represents a group of models that use the **exact same set** of converter IDs (`convId`). Columns are convIds; `X` marks membership in the shared set.
+
+| Group | Models | 101 | 105 | 112 | 114 | 118 | 119 | 151 | 152 | 161 | 203 | 204 | 211 | 214 | 215 | 217 | 219 | 300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 310 | 311 | 314 | 315 | 316 | 317 | 323 | 336 | 405 | 801 | 802 | 995 | 996 | 998 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| G1 | (EGSAH-X-EWSAH-X-D series 6-10kW GEO3) |  | X |  | X |  |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X |  |  |  |  | X |  | X | X |  | X |
+| G2 | EKHWET-BAV3(MULTI DHW TANK) |  | X |  | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X |  |  |  |  | X |  | X | X |  | X |
+| G3 | (EBLA-EDLA EWAA-EWYA D SERIES 9-16KW) |  | X |  | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X |  |  |  | X |  | X | X |  | X |
+| G4 | (LT_CA_CB_11-16KW), (LT_CB_11-16kW Bizone), (LT_EBLQ-EDLQ-CA series 11-16kW Monobloc), Daikin Mini chiller(EWAA-EWYA D series 9-16kW) | X | X |  | X | X |  | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  |  |  | X | X |  | X |  | X |
+| G5 | (LT_CA_CB_04-08KW), (LT_MULTI_DHWHP), (LT_MULTI_HYBRID), (LT_CB_04-08kW Bizone) | X | X |  | X | X |  | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X |  |  |  | X | X |  | X | X | X |
+| G6 | (ERGA D EHSH-X P30-50 D series 04-08kW-ECH2O), (ERGA D EHV-EHB-EHVZ DA series 04-08kW), (ERLA03 D EHFH-EHFZ DJ series 3kW) | X | X |  | X | X |  | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X |  |  |  | X |  | X | X | X | X |
+| G7 | (HYBRID), (EGSQH-A series 10kW GEO2), (LT_EBLQ-EBLQ-CA series 5-7kW Monobloc), Daikin Mini chiller(EWAQ-EWYQ B series 4-8kW) | X | X |  | X |  |  | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  |  |  | X | X |  | X | X | X |
+| G8 | (EPGA D EAB-EAV-EAVZ D(J) series 11-16kW) |  | X | X | X | X | X | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X |  |  |  | X |  | X | X |  | X |
+| G9 | (EBLA-EDLA D series 4-8kW Monobloc), (EPRA D ETV16-ETB16-ETVZ16 D series 14-16kW), (ERGA D EHV-EHB-EHVZ DJ series 04-08 kW), (ERGA E EHV-EHB-EHVZ E_EJ series 04-08kW), Daikin Mini chiller(EWAA-EWYA D series 4-8kW) |  | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X |  |  |  | X |  | X | X |  | X |
+| G10 | (EBLA-EDLA D series 9-16kW Monobloc) | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X |  |  |  | X |  | X | X |  | X |
+| G11 | (EPRA D ETSH-X 16P30-50 D series 14-16kW-ECH2O) |  | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X | X |  |  | X |  | X | X |  | X |
+| G12 | (ERLA D EBSH-X 16P30-50 D SERIES 11-16kW-ECH2O) | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X | X | X |  | X |  | X | X |  | X |
+| G13 | (EPRA D_D7 ETSH-X 16P30-50 E_E7 series 14-18kW-ECH2O), (EPRA D_D7 ETV16-ETB16-ETVZ16 E_E7 series 14-18kW), (EPRA E ETSH-X 16P30-50 E series 8-12kW-ECH2O), (EPRA E ETV16-ETB16-ETVZ16 E_EJ series 8-12kW), (ERGA E EHSH-X P30-50 E_EF series 04-08kW-ECH2O), (ERLA D EBV-EBB-EBVZ D SERIES 11-16kW) | X | X |  | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X | X |  | X | X | X | X | X | X |  | X | X |  | X |
